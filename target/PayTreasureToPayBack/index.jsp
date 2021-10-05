@@ -38,13 +38,17 @@
     </style>
     <script>
         $(function () {
+            //请求查询所有的数据
             $.get("/PayTreasureToPayBack/ConfigServlet/seall", function (res) {
+                //转换json
                 var crin = JSON.parse(res);
                 var th = "";
                 for (var i = 0; i < crin.length; i++) {
                     var obj = crin[i];
-                    th += "<p class='coupon'><span>" + obj.amt + "</span>优惠券 <button type='button' class='layui-btn layui-btn-danger' onclick='fc(" + obj.amt + "," + obj.ordernumber + "," + obj.transactionno + ")'>退票</button> </p>";
+                    //循环遍历数据
+                    th += "<form name=traderefund action=/PayTreasureToPayBack/ConfigServlet/ARefund method=post target='_blank'><input id='WIDTRout_trade_no' name='WIDTRout_trade_no' value="+obj.ordernumber+" type='hidden'/> <input id='WIDTRtrade_no' name='WIDTRtrade_no' value="+obj.transactionno+" type='hidden'/> <input id='WIDTRrefund_amount' name='WIDTRrefund_amount' type='hidden' value="+obj.amt+" /> <input id='WIDTRrefund_reason' name='WIDTRrefund_reason' value='赶不上飞机！' type='hidden'/> <input id='WIDTRout_request_no' name='WIDTRout_request_no'  type='hidden' /> <p class='coupon'> <span>" + obj.amt + "</span>优惠券 <button type='submit' class='layui-btn layui-btn-danger'>退票</button> </p> </form>";
                 }
+                //添加到后面
                 $("hr").after(th);
             })
         })
@@ -58,7 +62,7 @@
     <input id="WIDtotal_amount" name="WIDtotal_amount" type="hidden"/>
     <input id="WIDbody" name="WIDbody" value="南方航空G98T21机票付款" type="hidden"/>
     <p class="coupon">
-        <span id="sp">10</span>优惠券
+        <span id="sp">100</span>优惠券
         <button type="submit" class="layui-btn layui-btn-warm">购买</button>
     </p>
 </form>
@@ -75,8 +79,11 @@
         sNow += String(vNow.getMinutes());
         sNow += String(vNow.getSeconds());
         sNow += String(vNow.getMilliseconds());
+        //随机的订单号
         document.getElementById("WIDout_trade_no").value =  sNow;
+        //得到金额
         var nj=$("#sp").text();
+        //赋值给金额的文本框
         document.getElementById("WIDtotal_amount").value = nj;
     }
     GetDateNow();

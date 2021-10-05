@@ -33,7 +33,7 @@ public class PayTestDaoimpl implements PayTestDao {
 
     /**
      * 添加订单Beta
-     * @param pay
+     * @param pay 实体类
      * @return
      * @throws SQLException
      */
@@ -49,5 +49,13 @@ public class PayTestDaoimpl implements PayTestDao {
         int inau=runner.update(conn,se,obj);
         conn.close();
         return inau;
+    }
+
+    @Override
+    public int depayconfig(String ordernumber) throws SQLException {
+        String se="delete from paytest where ordernumber=?";
+        Connection conn=AliPool.getConn();
+        int desu=runner.update(conn,se,ordernumber);
+        return desu;
     }
 }

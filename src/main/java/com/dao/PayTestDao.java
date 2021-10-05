@@ -17,10 +17,18 @@ public interface PayTestDao {
     public List seall()throws SQLException;;
 
     /**
-     * 添加订单
-     * @param pay
+     * 付款成功的话添加订单
+     * @param pay 实体类
      * @return
      * @throws SQLException
      */
     public int inpayconfig(PayTest pay) throws SQLException;
+
+    /**
+     * 如果是退款成功则上传这条记录
+     * @param ordernumber
+     * @return
+     * @throws SQLException
+     */
+    public int depayconfig(String ordernumber) throws SQLException;
 }

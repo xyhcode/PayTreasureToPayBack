@@ -4,10 +4,25 @@ package com.entity;
  * @author 羡羡
  */
 public class PayTest {
+    /**
+     * id
+     */
     public int id;
+    /**
+     * 金额
+     */
     public String amt;
+    /**
+     *订单号
+     */
     public String ordernumber;
+    /**
+     *交易号 流水号
+     */
     public String transactionno;
+    /**
+     *交易时间
+     */
     public String paytime;
 
 
